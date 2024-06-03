@@ -1,9 +1,9 @@
 import { useState } from 'react'
-import { Route, Routes, Link, Outlet } from 'react-router-dom'
+import { Route, Routes, Link, Outlet, useParams } from 'react-router-dom'
 import './App.css'
 import Home from './routes/home'
 import ContactPage from './routes/contact'
-import Example from './routes/example'
+import Product from './routes/product'
 
 
 
@@ -44,6 +44,15 @@ function Layout(){
   )
 }
 
+function ProductWrapper(){
+  const params = useParams()
+  const {id} = params
+  return(
+    <Product id={id}/>
+  )
+
+}
+
 
 
 
@@ -55,7 +64,7 @@ function App() {
         <Route path="/" element={<Layout/>}>
           <Route index element={<Home/>}/>
           <Route path="contact" element={<ContactPage/>}/>
-          <Route path="example" element={<Example/>}/>
+          <Route path="product/:id" element={<ProductWrapper/>}/>
           {/* <Route path="product/:id" element={<ShowProduct/>} /> */}
         </Route>
       </Routes>

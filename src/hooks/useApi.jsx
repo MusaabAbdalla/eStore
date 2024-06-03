@@ -11,7 +11,6 @@ function useApi(url){
   useEffect(()=>{
     async function getData(){
       try{
-        setIsLoading(false)
         setIsLoading(true)
         const response = await fetch(url)
         const json = await response.json()
