@@ -1,9 +1,15 @@
 import useProductApi from "@/hooks/useProductApi";
+import { useContext, useState } from "react";
+import { CartContext } from "@/context/CartContext";
 const API = "https://v2.api.noroff.dev/online-shop"
+
 
 
 function Product({ id }) {
   const { data, isLoading, isError } = useProductApi(`${API}/${id}`)
+  const [message, setMessage] = useState("")
+  const [quantity, setQuantity] = useState(1)
+  const {cart ,dispatch} = useContext(CartContext)
 
   if (isLoading || !data) {
     return <div>Product is Loading</div>
@@ -11,13 +17,24 @@ function Product({ id }) {
   if (isError) {
     return <div>There is a problem</div>
   }
-  console.log(data)
-  return (
-    // <div>
-    //   <h1>{data.title}</h1>
-    //   <img alt="" src={data.image.url} />
 
-    // </div>
+   function addToCart(){
+    dispatch({type: "addToCart", payload:{...data,quantity}})
+    setMessage("Item added to cart successfully")
+    setTimeout(()=> setMessage(""),3000)
+  }
+
+  function incrementQuantity(){
+    setQuantity(count => count +1)
+  }
+
+  function decrementQuantity(){
+    setQuantity(count => (count > 1 ? count -1: 1))
+  }
+  const discount = data.price - data.discountedPrice
+  const discountPercentage = ((data.price -data.discountedPrice)/data.price) * 100
+
+  return (
 
     <section className="text-gray-600 body-font overflow-hidden">
       <div className="container px-5 py-24 mx-auto">
@@ -25,7 +42,7 @@ function Product({ id }) {
           <img alt={data.image.alt} className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src={data.image.url} />
           <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
             {data.tags.map((tag) => (
-              <h2 className="text-sm title-font text-gray-500 tracking-widest">{tag}</h2>
+              <h2 className="text-sm title-font text-gray-500 tracking-widest" key={tag}>{tag}</h2>
             ))}
             <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">{data.title}</h1>
             <div className="flex mb-4">
@@ -72,7 +89,7 @@ function Product({ id }) {
             </div>
             <div className="flex">
               <span className="title-font font-medium text-2xl text-gray-900">${data.price}</span>
-              <button className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Add To Cart</button>
+              <button onClick={addToCart} className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Add To Cart</button>
             </div>
             <div>
               <span className="title-font font-medium text-2xl text-gray-900">Reviews</span>
@@ -80,7 +97,7 @@ function Product({ id }) {
                 {data.reviews?.length ? (
 
                     data.reviews.map((review) => (
-                      <div className="border">
+                      <div className="border" key={review.id}>
                         <span className="title-font font-medium text-xl text-gray-800">Rating:{review.rating}</span>
                         <span className="title-font font-medium text-xl text-gray-800">{review.username}:</span>
                         <span className="title-font font-medium text-xl text-gray-800"> {review.description}</span>
