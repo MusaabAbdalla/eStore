@@ -37,8 +37,9 @@ function Contact() {
   };
 
   return (
-    <form className="mt-5 mb-5 contact" onSubmit={handleSubmit(onSubmit)}>
-      <h2 className="text-center mt-4">Contact Form</h2>
+
+    <form className="max-w-l space-y-3 text-center mx-auto border rounded" onSubmit={handleSubmit(onSubmit)}>
+      <h2 className="text-center mt-4 font-bold text-2xl text-gray-800">Contact Form</h2>
       <div>
         <label> Full Name: </label>
         <input type="text" {...register("fullName")} />
