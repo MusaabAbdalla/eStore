@@ -15,9 +15,9 @@ function Nav() {
 
     <header className="p-4 bg-violet-500 text-white">
       <div className="container flex justify-between h-16 mx-auto">
-        <a rel="noopener noreferrer" href="#" aria-label="Back to homepage" className="flex items-center p-2">
+        <Link to="/" className="flex items-center p-2">
           <img alt="estore logo" src={logo} className=" logo " />
-        </a>
+        </Link>
         <ul className="items-stretch hidden space-x-3 md:flex">
           <li className="flex">
             <Link to="/" className="flex items-center px-4 -mb-1 border-b-2 dark:border-">Home</Link>

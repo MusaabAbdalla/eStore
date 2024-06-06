@@ -9,7 +9,7 @@ function Product({ id }) {
   const { data, isLoading, isError } = useProductApi(`${API}/${id}`)
   const [message, setMessage] = useState("")
   const [quantity, setQuantity] = useState(1)
-  const {cart ,dispatch} = useContext(CartContext)
+  const { cart, dispatch } = useContext(CartContext)
 
   if (isLoading || !data) {
     return <div>Product is Loading</div>
@@ -18,21 +18,14 @@ function Product({ id }) {
     return <div>There is a problem</div>
   }
 
-   function addToCart(){
-    dispatch({type: "addToCart", payload:{...data,quantity}})
+  function addToCart() {
+    dispatch({ type: "addToCart", payload: { ...data, quantity } })
     setMessage("Item added to cart successfully")
-    setTimeout(()=> setMessage(""),3000)
+    setTimeout(() => setMessage(""), 3000)
   }
 
-  function incrementQuantity(){
-    setQuantity(count => count +1)
-  }
-
-  function decrementQuantity(){
-    setQuantity(count => (count > 1 ? count -1: 1))
-  }
   const discount = data.price - data.discountedPrice
-  const discountPercentage = ((data.price -data.discountedPrice)/data.price) * 100
+  const discountPercentage = ((data.price - data.discountedPrice) / data.price) * 100
 
   return (
 
@@ -87,32 +80,43 @@ function Product({ id }) {
               <div className="flex ml-6 items-center">
               </div>
             </div>
-            <div className="flex">
-              <span className="title-font font-medium text-2xl text-gray-900">${data.price}</span>
+            <div className="flex items-start">
+              <div>
+                {data.discountedPrice === data.price ? (
+
+                    <p className="title-font text-2xl  font-medium text-gray-9oo">{data.discountedPrice}</p>
+
+                ) : (
+                  <div>
+                    <p className="title-font text-2xl  font-medium text-gray-9oo">{data.discountedPrice}</p>
+                    <p className="text-sm line-through text-red-700">{data.price}</p>
+                  </div>
+                )}
+              </div>
               <button onClick={addToCart} className="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">Add To Cart</button>
             </div>
+          </div>
+        </div>
+      </div>
             <div>
               <span className="title-font font-medium text-2xl text-gray-900">Reviews</span>
               <div className="">
                 {data.reviews?.length ? (
 
-                    data.reviews.map((review) => (
-                      <div className="border" key={review.id}>
-                        <span className="title-font font-medium text-xl text-gray-800">Rating:{review.rating}</span>
-                        <span className="title-font font-medium text-xl text-gray-800">{review.username}:</span>
-                        <span className="title-font font-medium text-xl text-gray-800"> {review.description}</span>
-                      </div>
+                  data.reviews.map((review) => (
+                    <div className="border border-rounded" key={review.id}>
+                      <span className="title-font font-medium text-xl text-gray-800">Rating:{review.rating}</span>
+                      <span className="title-font font-medium text-xl text-gray-800">{review.username}:</span>
+                      <span className="title-font font-medium text-xl text-gray-800"> {review.description}</span>
+                    </div>
 
-                    ))
+                  ))
 
                 ) : (
                   <div>No Review to Show</div>
                 )}
               </div>
             </div>
-          </div>
-        </div>
-      </div>
     </section>
   )
 }
