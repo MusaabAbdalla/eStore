@@ -29,22 +29,7 @@ function Cart() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   return (
-    // <div className="flex flex-col max-w-3xl p-6 space-y-4 sm:p-10 dark:bg-gray-50 dark:text-gray-800">
     <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
       {cart.length > 0 ? (
         <div>
@@ -119,10 +104,10 @@ function Cart() {
             <p className="text-sm dark:text-gray-600">Not including taxes and shipping costs</p>
           </div>
           <div className="flex justify-end space-x-4">
-            <button onClick={() => navigate("/")} type="button" className="px-6 py-2 border rounded-md dark:border-violet-600">
+            <button onClick={() => navigate("/")} type="button" className="px-6 py-2 border rounded-md text-white bg-violet-600">
               <span className="sr-only sm:not-sr-only">Continue Shopping</span>
             </button>
-            <button onClick={() => handleCheckout()} type="button" className="px-6 py-2 border rounded-md dark:bg-violet-600 dark:text-gray-50 dark:border-violet-600">
+            <button onClick={() => handleCheckout()} type="button" className="px-6 py-2 border rounded-md text-white bg-violet-600 dark:text-gray-50 dark:border-violet-600">
               <span className="sr-only sm:not-sr-only">Checkout</span>
             </button>
           </div>

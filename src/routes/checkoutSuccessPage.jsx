@@ -6,9 +6,9 @@ function CheckoutSuccessPage() {
   return (
     <div className="max-w-s mx-auto mt-20  ">
       <div className="flex flex-col items-center gap-y-5">
-        <div class="flex items-center justify-center w-16 h-16 bg-green-500 text-white rounded-full">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+        <div className="flex items-center justify-center w-16 h-16 bg-green-500 text-white rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
           </svg>
         </div>
         <div>
