@@ -43,7 +43,7 @@ This project is a React-based e-commerce website that connects to the Noroff API
    - Vite.
    - CSS Framework: Bootstrap.
    - Noroff API v2.
-   -Netlify for deployment
+   - Netlify for deployment
 
 ## Installation
 
